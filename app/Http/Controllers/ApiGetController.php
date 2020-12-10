@@ -28,13 +28,18 @@ class ApiGetController extends Controller
         2017 = 0003280187
         2018 = 0001723388
         */ 
-        $year = ['0003280105','0003280145','0003280187','0001723388'];
+        $year = ['2015'=>"0003280105",'2016'=>"0003280145",'2017'=>"0003280187",'2018'=>"0001723388"];
+        
+        
+        $year2 = $request->year;
+        $year3 = $year[$year2];
+        //$year_select = $year[$year2];
         
 
-        
+
         
         $lang = "J";
-        $statsDataId = "0003280145";
+        $statsDataId = $year3;
         $metaGetFlg = "Y" ;
         $cntGetFlg = "N";
         $explanationGetFlg = "Y";
@@ -95,10 +100,10 @@ class ApiGetController extends Controller
         $bean = array_slice($beanTon, 0, 6); 
         
         
-
+        echo "year3:".$year3;
 
         //var_dump($bean);
-        return view('api', compact('country', 'bean', 'year'));
+        return view('api', compact('country', 'bean'));
         
         
 

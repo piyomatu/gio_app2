@@ -121,8 +121,28 @@ var config = {
 };
 var controller = new GIO.Controller(container, config);
 var data;
+/*
+   $('#year_select').on('change', function(){
+     let year = $('#year_selectt').val();
+  
+     $.when(
+         $.ajax({
+         type:'GET',
+         url:'api/' + year,
+         data:{ year : year },
+         dataType:"json",
+     })
+     ).then(function(data1){
+         let results = data1[0];
+         results = results;
+     
+         console.log(results)
+     });
+   });
+*/
+
 $.ajax({
-  url: "app/data/sampleData.json",
+  url: 'data/sampleData.json',
   type: "GET",
   contentType: "application/json; charset=utf-8",
   async: true,
@@ -131,24 +151,32 @@ $.ajax({
     data = inputData; // data can be add before init() function be called
 
     controller.addData(inputData);
+    $("#on").on('click', function () {
+      // can use clearData API to clear data in globe
+      controller.setAutoRotation(true, 0.5);
+    });
+    $("#off").on('click', function () {
+      // can use clearData API to clear data in globe
+      controller.setAutoRotation(false);
+    });
+    $("#add").on('click', function () {
+      // can use clearData API to clear data in globe
+      //alert("クリックされました");
+      controller.addData(data);
+    });
+    $("#clear").on('click', function () {
+      // can use clearData API to clear data in globe
+      controller.clearData();
+    });
     controller.init();
   }
-}); //controller.addData(data);
-//controller.setAutoRotation( true, 0.5 );
-
+});
+console.log($.fn.jquery);
 controller.onCountryPicked(function (select, relate) {
   console.log(select);
   console.log(relate);
-});
-$('#on').click(function () {
-  controller.setAutoRotation(true, 1);
-});
-$('#off').click(function () {
-  controller.setAutoRotation(false);
-});
-$('#clear').click(function () {
-  controller.clearData();
-}); //controller.init();
+}); // data can be add after init() function be called, after add new data, the system will be automatically updated
+//controller.init();
 
 /***/ }),
 

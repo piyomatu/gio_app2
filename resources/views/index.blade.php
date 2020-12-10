@@ -18,10 +18,13 @@
     
 
     <script src="https://threejs.org/build/three.min.js"></script>
+    {{--<script src="../build/gio.min.js"></script>--}}
 
     
   <!-- load data in this data script -->
   <script src="https://raw.githack.com/syt123450/giojs/master/assets/data/sampleData.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -39,7 +42,9 @@
 
   <button id="on">回転ON</button>
   <button id="off">回転OFF</button>
+  <button id="add">データ追加</button>
   <button id="clear">データクリア</button>
+
   
   
   <select>
@@ -47,9 +52,9 @@
       <option value="{{ $country->Name }}">{{$country->Name}}</option>
     @endforeach
   </select>
-  <select>
-    @for ($i = 0; $i < 4; $i++)
-  <option>{{$year[$i]}}</option>
+  <select name="year_select">
+    @for ($i = 2015; $i < 2019; $i++)
+  <option value="{{$i}}">{{$i}}</option>
     @endfor
     
   </select>
