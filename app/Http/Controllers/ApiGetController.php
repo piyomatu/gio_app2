@@ -119,7 +119,7 @@ class ApiGetController extends Controller
                 $countryDB = CountryJp::where('name', $value)->value('code');
                 //array_push($giodata, $countryDB);
                 array_push($giodata, array("e"=>"JP", "i"=>$countryDB, "v"=>(int)$bean[$key-1], "n"=>$value));
-                array_push($giodata2, array("e"=>"JP", "i"=>$countryDB, "v"=>(int)$bean[$key-1]));
+                array_push($giodata2, array("e"=>"JP", "i"=>$countryDB, "v"=>(int)$bean[$key-1]*10));
 
             }
            
@@ -130,15 +130,19 @@ class ApiGetController extends Controller
             array_push($dbName, $countryName->name);
         }
         
-        $gio = json_encode($giodata);
+        $gio = json_encode($giodata, JSON_UNESCAPED_UNICODE);
         $json = mb_convert_encoding($gio, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
+
+        $gio2 = json_encode($giodata2, JSON_UNESCAPED_UNICODE);
+        $json2 = mb_convert_encoding($gio2, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
+
         
         //echo "year3:".$year3;
 
-        //var_dump($json);
+        var_dump($json);
         //var_dump($bean);
         //return [$country, $bean];
-        return view('api', compact('country', 'bean', 'giodata', 'giodata2'));
+        return view('api', compact('country', 'bean', 'giodata', 'json2'));
         
         
         

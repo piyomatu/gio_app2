@@ -50,143 +50,158 @@ var data;
       });
     });
 */
+$(function() {
+  $(document).on('change','#year_select', function() {
+    let year = $(this).val();
+    let countrySelect = $(this).val();
+    
+    //let giodata = $('#giodata').data();
+    
+    $('#moji').text(countrySelect);
 
 
+    $('p').text(year);
+    if (year) {
+        window.location = year;
+      }
+      return false;
+    });
+ 
 
-  
-    $.ajax( {
 
-        url: 'data/sampleData.json',
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        async: true,
-        dataType: "json",
-    })
-        .then(function(inputData) {
-          let dataSet = [];
-            data = inputData;
-            
-            
-            
-            
-            //var dataSet = [];
-            
-            $.each($('#giodata'), function() {
+   
+      $.ajax( {
+
+          url: 'data/sampleData.json',
+          type: "GET",
+          contentType: "application/json; charset=utf-8, ",
+          async: true,
+          dataType: "json",
+          
+      })
+      
+
+      //$.get(url,testData,null,"json")
+          .then(function(inputData) {
+
+              data = inputData;
+
+              data2 = $('#giodata').data('json');
+
+              var dataSet = [];
+              dataSet.push(data2);
               
+
+
+
+              var giocount = $('#giodata').length; 
+              /*
+              $.each($('#giodata'), function() {
+
+                  var giodataI = $( this ).data('i');
+                  var giodataV = $( this ).data('v');
+                  dataSet.push({
+                    "e": "JP",
+                    "i": giodataI,
+                    "v": giodataV,
+                  });
+                
+                
+
+              });
+              */
+              $('#see').text(JSON.stringify(data2));
+              $('#json').text(JSON.stringify(inputData));
+
+             /*
+             $(function(){
+              for (var i = 0; i < $('#giodata p').length; i++){
                 var giodataI = $('#giodata').data('i');
                 var giodataV = $('#giodata').data('v');
                 dataSet.push({
                   "e": "JP",
                   "i": giodataI,
                   "v": giodataV
-              });
-            });
-            
-           /*
-           $(function(){
-            for (var i = 0; i < $('#giodata p').length; i++){
-              var giodataI = $('#giodata').data('i');
-              var giodataV = $('#giodata').data('v');
-              dataSet.push({
-                "e": "JP",
-                "i": giodataI,
-                "v": giodataV
-              });
-            }
-           });
-           */
-           $('#see').text(JSON.stringify(dataSet));
-            
-              
-              
-            
-              
-            controller.addData( dataSet );
-                  
-
-            // data can be add before init() function be called
-            //controller.addData( inputData );
+                });
+              }
+             });
+             */
+             //$('#see').text(JSON.stringify(dataSet));
 
 
-            $( "#on" ).on('click', function () {
 
-              // can use clearData API to clear data in globe
-              controller.setAutoRotation( true, 0.5 );
-            
-              } );
-            $( "#off" ).on('click', function () {
-              // can use clearData API to clear data in globe
-              controller.setAutoRotation(false);
-            
-              } );
-            
 
-            $( "#add" ).on('click', function () {
 
-              // can use clearData API to clear data in globe
-              //alert("クリックされました");
-              controller.addData( data );
-            
-              } );
-            
-            
-              $( "#clear" ).on('click', function () {
-              
-              // can use clearData API to clear data in globe
-              
-              controller.clearData();
-              
-              } );
+              //controller.addData( dataSet );
 
-              $( "#usa" ).on('click', function () {
+
+              // data can be add before init() function be called
+              //controller.addData( inputData );
+
+
+              $( "#on" ).on('click', function () {
+
+                // can use clearData API to clear data in globe
+                controller.setAutoRotation( true, 0.5 );
               
+                } );
+              $( "#off" ).on('click', function () {
+                // can use clearData API to clear data in globe
+                controller.setAutoRotation(false);
+              
+                } );
+              
+
+              $( "#add" ).on('click', function () {
+
+                // can use clearData API to clear data in globe
+                //alert("クリックされました");
+                controller.addData( data );
+              
+                } );
+              
+              
+                $( "#clear" ).on('click', function () {
+                
                 // can use clearData API to clear data in globe
                 
-               controller.switchCountry( "US" );
-          
+                controller.clearData();
                 
-              } );
+                } );
 
-              
+                $( "#usa" ).on('click', function () {
+                
+                  // can use clearData API to clear data in globe
 
-              $(function() {
-                $(document).on('change','#year_select', function() {
-                  let year = $(this).val();
-                  let countrySelect = $(this).val();
-                  
-                  //let giodata = $('#giodata').data();
-                  
-                  $('#moji').text(countrySelect);
+                 controller.switchCountry( "US" );
+                
 
-              
-                  $('p').text(year);
-                  if (year) {
-                      window.location = year;
-                    }
-                    return false;
+                } );
+
+
+
+
+
+                  $(function() {
+                    $(document).on('change','#coutry_select', function() {
+                      let values = $(this).val().split(',');
+                      let countryValue = values[0];
+                      let coutryTon = values[1];
+                      //let countryValue = $(this).val();
+                      controller.switchCountry( countryValue );
+                      $('#ton').text(coutryTon);
+
+                    });
                   });
-                });
+                
 
-                $(function() {
-                  $(document).on('change','#coutry_select', function() {
-                    let values = $(this).val().split(',');
-                    let countryValue = values[0];
-                    let coutryTon = values[1];
-                    //let countryValue = $(this).val();
-                    controller.switchCountry( countryValue );
-                    $('#ton').text(coutryTon);
+                
+                
+              controller.init();
 
-                  });
-                });
-              
-
-               
-            
-            controller.init();
-
-          
+                
+          });
         });
-
   
 
     

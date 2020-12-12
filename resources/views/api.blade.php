@@ -28,10 +28,12 @@
   
   
   <p id="moji"></p>
+  {{--
   @foreach ($giodata as $key => $value4)
     <p id="giodata" data-i="{{$value4["i"]}}" data-v="{{$value4["v"]}}"></p>
   @endforeach
-  
+  --}}
+  <p id="giodata" data-json="{{$json2}}"></p>
   
   {{--
   @foreach ($giodata as $data)
@@ -58,6 +60,7 @@
   </select>
   <p id="ton"></p>
   <p id="see"></p>
+  <p id="json"></p>
 
 </body>
 

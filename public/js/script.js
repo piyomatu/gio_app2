@@ -17374,90 +17374,100 @@ var data;
    });
 */
 
-$.ajax({
-  url: 'data/sampleData.json',
-  type: "GET",
-  contentType: "application/json; charset=utf-8",
-  async: true,
-  dataType: "json"
-}).then(function (inputData) {
-  var dataSet = [];
-  data = inputData; //var dataSet = [];
+$(function () {
+  $(document).on('change', '#year_select', function () {
+    var year = $(this).val();
+    var countrySelect = $(this).val(); //let giodata = $('#giodata').data();
 
-  $.each($('#giodata'), function () {
-    var giodataI = $('#giodata').data('i');
-    var giodataV = $('#giodata').data('v');
-    dataSet.push({
-      "e": "JP",
-      "i": giodataI,
-      "v": giodataV
-    });
+    $('#moji').text(countrySelect);
+    $('p').text(year);
+
+    if (year) {
+      window.location = year;
+    }
+
+    return false;
   });
-  /*
-  $(function(){
-   for (var i = 0; i < $('#giodata p').length; i++){
-     var giodataI = $('#giodata').data('i');
-     var giodataV = $('#giodata').data('v');
-     dataSet.push({
-       "e": "JP",
-       "i": giodataI,
-       "v": giodataV
+  $.ajax({
+    url: 'data/sampleData.json',
+    type: "GET",
+    contentType: "application/json; charset=utf-8, ",
+    async: true,
+    dataType: "json"
+  }) //$.get(url,testData,null,"json")
+  .then(function (inputData) {
+    data = inputData;
+    data2 = $('#giodata').data('json');
+    var dataSet = [];
+    dataSet.push(data2);
+    var giocount = $('#giodata').length;
+    /*
+    $.each($('#giodata'), function() {
+         var giodataI = $( this ).data('i');
+        var giodataV = $( this ).data('v');
+        dataSet.push({
+          "e": "JP",
+          "i": giodataI,
+          "v": giodataV,
+        });
+      
+      
      });
-   }
-  });
-  */
+    */
 
-  $('#see').text(JSON.stringify(dataSet));
-  controller.addData(dataSet); // data can be add before init() function be called
-  //controller.addData( inputData );
-
-  $("#on").on('click', function () {
-    // can use clearData API to clear data in globe
-    controller.setAutoRotation(true, 0.5);
-  });
-  $("#off").on('click', function () {
-    // can use clearData API to clear data in globe
-    controller.setAutoRotation(false);
-  });
-  $("#add").on('click', function () {
-    // can use clearData API to clear data in globe
-    //alert("クリックされました");
-    controller.addData(data);
-  });
-  $("#clear").on('click', function () {
-    // can use clearData API to clear data in globe
-    controller.clearData();
-  });
-  $("#usa").on('click', function () {
-    // can use clearData API to clear data in globe
-    controller.switchCountry("US");
-  });
-  $(function () {
-    $(document).on('change', '#year_select', function () {
-      var year = $(this).val();
-      var countrySelect = $(this).val(); //let giodata = $('#giodata').data();
-
-      $('#moji').text(countrySelect);
-      $('p').text(year);
-
-      if (year) {
-        window.location = year;
-      }
-
-      return false;
+    $('#see').text(JSON.stringify(data2));
+    $('#json').text(JSON.stringify(inputData));
+    /*
+    $(function(){
+     for (var i = 0; i < $('#giodata p').length; i++){
+       var giodataI = $('#giodata').data('i');
+       var giodataV = $('#giodata').data('v');
+       dataSet.push({
+         "e": "JP",
+         "i": giodataI,
+         "v": giodataV
+       });
+     }
     });
-  });
-  $(function () {
-    $(document).on('change', '#coutry_select', function () {
-      var values = $(this).val().split(',');
-      var countryValue = values[0];
-      var coutryTon = values[1]; //let countryValue = $(this).val();
+    */
+    //$('#see').text(JSON.stringify(dataSet));
+    //controller.addData( dataSet );
+    // data can be add before init() function be called
+    //controller.addData( inputData );
 
-      controller.switchCountry(countryValue);
-      $('#ton').text(coutryTon);
+    $("#on").on('click', function () {
+      // can use clearData API to clear data in globe
+      controller.setAutoRotation(true, 0.5);
     });
+    $("#off").on('click', function () {
+      // can use clearData API to clear data in globe
+      controller.setAutoRotation(false);
+    });
+    $("#add").on('click', function () {
+      // can use clearData API to clear data in globe
+      //alert("クリックされました");
+      controller.addData(data);
+    });
+    $("#clear").on('click', function () {
+      // can use clearData API to clear data in globe
+      controller.clearData();
+    });
+    $("#usa").on('click', function () {
+      // can use clearData API to clear data in globe
+      controller.switchCountry("US");
+    });
+    $(function () {
+      $(document).on('change', '#coutry_select', function () {
+        var values = $(this).val().split(',');
+        var countryValue = values[0];
+        var coutryTon = values[1]; //let countryValue = $(this).val();
+
+        controller.switchCountry(countryValue);
+        $('#ton').text(coutryTon);
+      });
+    });
+    controller.init();
   });
-  controller.init();
 });
 console.log($.fn.jquery);
 controller.onCountryPicked(function (select, relate) {
