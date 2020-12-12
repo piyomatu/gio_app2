@@ -44,7 +44,9 @@
   <button id="off">回転OFF</button>
   <button id="add">データ追加</button>
   <button id="clear">データクリア</button>
-
+  <button id="usa">アメリカ</button>
+  
+  <p id="moji"></p>
   
   
   <select>
@@ -59,10 +61,18 @@
     
   </select>
 
+  <select id="country_select">
+    @foreach($countryJp as $countryJ)
+      <option value="{{ $countryJ->code }}">{{$countryJ->name}}</option>
+    @endforeach
+  </select>
+
+  
 
   <p>使用Api: 政府統計の総合窓口（e-Stat）</p>
   <p>このサービスは、政府統計総合窓口(e-Stat)のAPI機能を使用していますが、サービスの内容は国によって保証されたものではありません。
 
   </p>
+
 
 </body>

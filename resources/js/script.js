@@ -1,3 +1,4 @@
+const { forEach, countBy } = require("lodash");
 
 var container = document.getElementById("globalArea");
 
@@ -52,7 +53,7 @@ var data;
 
 
 
-
+  
     $.ajax( {
 
         url: 'data/sampleData.json',
@@ -60,12 +61,51 @@ var data;
         contentType: "application/json; charset=utf-8",
         async: true,
         dataType: "json",
-        success: function ( inputData ) {
-
+    })
+        .then(function(inputData) {
+          let dataSet = [];
             data = inputData;
+            
+            
+            
+            
+            //var dataSet = [];
+            
+            $.each($('#giodata'), function() {
+              
+                var giodataI = $('#giodata').data('i');
+                var giodataV = $('#giodata').data('v');
+                dataSet.push({
+                  "e": "JP",
+                  "i": giodataI,
+                  "v": giodataV
+              });
+            });
+            
+           /*
+           $(function(){
+            for (var i = 0; i < $('#giodata p').length; i++){
+              var giodataI = $('#giodata').data('i');
+              var giodataV = $('#giodata').data('v');
+              dataSet.push({
+                "e": "JP",
+                "i": giodataI,
+                "v": giodataV
+              });
+            }
+           });
+           */
+           $('#see').text(JSON.stringify(dataSet));
+            
+              
+              
+            
+              
+            controller.addData( dataSet );
+                  
 
             // data can be add before init() function be called
-            controller.addData( inputData );
+            //controller.addData( inputData );
 
 
             $( "#on" ).on('click', function () {
@@ -98,12 +138,58 @@ var data;
               
               } );
 
+              $( "#usa" ).on('click', function () {
+              
+                // can use clearData API to clear data in globe
+                
+               controller.switchCountry( "US" );
+          
+                
+              } );
+
+              
+
+              $(function() {
+                $(document).on('change','#year_select', function() {
+                  let year = $(this).val();
+                  let countrySelect = $(this).val();
+                  
+                  //let giodata = $('#giodata').data();
+                  
+                  $('#moji').text(countrySelect);
+
+              
+                  $('p').text(year);
+                  if (year) {
+                      window.location = year;
+                    }
+                    return false;
+                  });
+                });
+
+                $(function() {
+                  $(document).on('change','#coutry_select', function() {
+                    let values = $(this).val().split(',');
+                    let countryValue = values[0];
+                    let coutryTon = values[1];
+                    //let countryValue = $(this).val();
+                    controller.switchCountry( countryValue );
+                    $('#ton').text(coutryTon);
+
+                  });
+                });
+              
+
+               
             
             controller.init();
 
-        }
+          
+        });
 
-    } );
+  
+
+    
 
 
     console.log($.fn.jquery);

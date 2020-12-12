@@ -19,8 +19,9 @@ Route::get('/', function () {
 
 Route::get('index', 'CountryController@index');
 
-Route::get('api','ApiGetController@eStartGetData');
 
+Route::get('api', 'ApiGetController@eStartGetData');
 Route::get('api/{year}', 'ApiGetController@eStartGetData');
+
 
 

@@ -1,80 +1,64 @@
 <head>
+  <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <script src="https://threejs.org/build/three.min.js"></script>
     
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://raw.githack.com/syt123450/giojs/master/assets/data/sampleData.js"></script>
   
 
 </head>
 
 <body>
+  <div id="globalArea" style="width:800px;height:420px"></div>
+  <script src="https://raw.githack.com/syt123450/giojs/master/build/gio.min.js"></script>
   <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/script.js') }}"></script>
   {{--<script src="{{ asset('js/scriptS.js') }}"></script>--}}
-  <script>
-    $(function() {
-      $(document).on('change','#year_select', function() {
-        var year = $(this).val();
-    
-        $('p').text(year);
-    
-      } );
-    } );
+  
 
-$('#year_select').on('change', function(){
-      let year = $(this).val();
-   
-    $.ajax({
-          type:'GET',
-          url:'api/' + year,
-          data:{ year : year },
-          dataType:"json"
-      })
-      .then(function(data1){
-          
-      
-          console.log(data1);
-      });
-});
-  </script>
+  <button id="on">回転ON</button>
+  <button id="off">回転OFF</button>
+  <button id="add">データ追加</button>
+  <button id="clear">データクリア</button>
+  <button id="usa">アメリカ</button>
   
   
-  <select>
-    @foreach($country as $kuni)
-      @if ($kuni != "合計" && $kuni != "上位５カ国以外計")
-        <option value="{{ $kuni }}">{{$kuni}}</option>
-      @endif   
+  <p id="moji"></p>
+  @foreach ($giodata as $key => $value4)
+    <p id="giodata" data-i="{{$value4["i"]}}" data-v="{{$value4["v"]}}"></p>
+  @endforeach
+  
+  
+  {{--
+  @foreach ($giodata as $data)
+    <span id="giodata" data-name="{{ $data }}"></span>
+  @endforeach
+  --}}
+  
+  
+  
+
+
+  <select id="coutry_select" name="coutry_select">
+    @foreach ($giodata as $key => $value3)
+  <option value="{{ $value3["i"]}}, {{$value3["v"]}}">{{$value3["n"]}}</option>
     @endforeach
   </select>
 
   
-  <select id="year_select" name="year">
+  <select id="year_select" name="year_select">
     @for ($i = 2015; $i < 2019; $i++)
-    <option value="{{$i}}" selected="selected">{{$i}}</option>
+    <option value="{{$i}}" selected=3>{{$i}}</option>
     @endfor
     
   </select>
-  <p></p>
-{{--}}
-{{Form::select('year', [
-   '0' => '2015',
-   '1' => '2016',,
-   '2' => '2017',
-   '3' => '2018', 0]
-)}}
---}}
+  <p id="ton"></p>
+  <p id="see"></p>
 
-  @foreach ($country as $key => $value)
-    @if ($value != "合計" && $value != "上位５カ国以外計")
-    {{$value}}<br>
-    @endif   
-  @endforeach
-  @foreach ($bean as $value2)
-      {{$value2}}<br>
-  @endforeach
-
-
-  
 </body>
 
 
