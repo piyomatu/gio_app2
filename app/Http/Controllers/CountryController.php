@@ -186,9 +186,9 @@ class CountryController extends Controller
         $bean = array_slice($beanTon, 0, 5); 
         
         
-        echo "year3:".$year3;
+        //echo "year3:".$year3;
 
-        var_dump($country);
+        //var_dump($country);
         return [$country, $bean];
         //return view('index', compact('country', 'bean'));
         

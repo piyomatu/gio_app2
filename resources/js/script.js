@@ -31,45 +31,12 @@ var config = {
 var controller = new GIO.Controller(container,config);
 
 var data;
- /*
-    $('#year_select').on('change', function(){
-      let year = $('#year_selectt').val();
-   
-      $.when(
-          $.ajax({
-          type:'GET',
-          url:'api/' + year,
-          data:{ year : year },
-          dataType:"json",
-      })
-      ).then(function(data1){
-          let results = data1[0];
-          results = results;
-      
-          console.log(results)
-      });
-    });
-*/
-$(function() {
-  $(document).on('change','#year_select', function() {
-    let year = $(this).val();
-    let countrySelect = $(this).val();
-    
-    //let giodata = $('#giodata').data();
-    
-    $('#moji').text(countrySelect);
-
-
-    $('p').text(year);
-    if (year) {
-        window.location = year;
-      }
-      return false;
-    });
  
 
+    
 
-   
+
+    
       $.ajax( {
 
           url: 'data/sampleData.json',
@@ -79,10 +46,23 @@ $(function() {
           dataType: "json",
           
       })
+      /*
+      $.ajax( {
+
+        url: 'api/' + year,
+        type: "GET",
+        async: true,
+        dataType: "text",
+        
+    })*/
       
 
       //$.get(url,testData,null,"json")
           .then(function(inputData) {
+
+            
+              
+            
 
               data = inputData;
 
@@ -92,52 +72,14 @@ $(function() {
               dataSet.push(data2);
               
 
-
+              controller.addData( data2 );
 
               var giocount = $('#giodata').length; 
               /*
-              $.each($('#giodata'), function() {
-
-                  var giodataI = $( this ).data('i');
-                  var giodataV = $( this ).data('v');
-                  dataSet.push({
-                    "e": "JP",
-                    "i": giodataI,
-                    "v": giodataV,
-                  });
-                
-                
-
-              });
-              */
               $('#see').text(JSON.stringify(data2));
               $('#json').text(JSON.stringify(inputData));
-
-             /*
-             $(function(){
-              for (var i = 0; i < $('#giodata p').length; i++){
-                var giodataI = $('#giodata').data('i');
-                var giodataV = $('#giodata').data('v');
-                dataSet.push({
-                  "e": "JP",
-                  "i": giodataI,
-                  "v": giodataV
-                });
-              }
-             });
-             */
-             //$('#see').text(JSON.stringify(dataSet));
-
-
-
-
-
-              //controller.addData( dataSet );
-
-
-              // data can be add before init() function be called
-              //controller.addData( inputData );
-
+            */
+             
 
               $( "#on" ).on('click', function () {
 
@@ -156,7 +98,7 @@ $(function() {
 
                 // can use clearData API to clear data in globe
                 //alert("クリックされました");
-                controller.addData( data );
+                controller.addData( data2 );
               
                 } );
               
@@ -169,39 +111,58 @@ $(function() {
                 
                 } );
 
-                $( "#usa" ).on('click', function () {
-                
-                  // can use clearData API to clear data in globe
-
-                 controller.switchCountry( "US" );
                 
 
-                } );
 
 
 
 
-
-                  $(function() {
-                    $(document).on('change','#coutry_select', function() {
-                      let values = $(this).val().split(',');
-                      let countryValue = values[0];
-                      let coutryTon = values[1];
-                      //let countryValue = $(this).val();
-                      controller.switchCountry( countryValue );
-                      $('#ton').text(coutryTon);
-
-                    });
+                $(function() {
+                  $(document).on('change','#coutry_select', function() {
+                    let values = $(this).val().split(',');
+                    let countryValue = values[0];
+                    let coutryTon = values[1];
+                    let countryName = values[2];
+                    
+                    //let countryValue = $(this).val();
+                    controller.switchCountry( countryValue );
+                    $('#ton').html(countryName + "から" +  '<br>' + "日本へのコーヒー豆輸出量は" +  '<br>' + coutryTon + "トンです"); 
                   });
+                });
                 
+                $(function() {
+                  $(document).on('change','#year_select', function() {
+                    let year = $(this).val();
+                    let countrySelect = $(this).val();
+                    
+                    //let giodata = $('#giodata').data();
+                    
+                    
+                   
+                
+                
+                    $('p').text(year);
+                    if (year) {
+                
+                         $('#moji').text(countrySelect);
+                        window.location = year;
+                        
+                        $( "#year_select" ).val( $( this ).val() );
+                      }
+                      
+                    });
+                
+                    
+                  });
 
                 
                 
-              controller.init();
+                controller.init();
 
                 
           });
-        });
+        
+     
   
 
     

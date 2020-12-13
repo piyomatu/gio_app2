@@ -1,0 +1,108 @@
+#on,
+#off,
+#add,
+#clear {
+  position: absolute;
+  left: 50px;
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #cbcbcb;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  box-sizing: border-box;
+  transition: 1s;
+  background-color: rgba(110, 110, 110, 0.8);
+}
+
+#coutry_select,
+#year_select {
+  position: absolute;
+  right: 100px;
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #cbcbcb;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  box-sizing: border-box;
+  transition: 1s;
+  background-color: rgba(110, 110, 110, 0.8);
+}
+
+#ton {
+  position: absolute;
+  left: 250px;
+  width: 250px;
+  height: 60px;
+  line-height: 70px;
+  text-align: center;
+  color: #cbcbcb;
+}
+
+#estart,
+#estart2 {
+  position: absolute;
+  right: 50px;
+  width: 350px;
+  height: 60px;
+  line-height: 20px;
+  font-size: 10px;
+  text-align: right;
+  color: #cbcbcb;
+}
+
+#on:hover,
+#off:hover,
+#add:hover,
+#clear:hover,
+#coutry_select:hover,
+#year_select:hover {
+  color: #fff;
+  background-color: #929292;
+}
+
+#on {
+  top: 100px;
+}
+
+#off {
+  top: 200px;
+}
+
+#add {
+  top: 300px;
+}
+
+#clear {
+  top: 400px;
+}
+
+#year_select {
+  top: 100px;
+}
+
+#coutry_select {
+  top: 300px;
+}
+
+#ton {
+  top: 100px;
+}
+
+#estart {
+  bottom: 50px;
+}
+
+#estart2 {
+  bottom: 30px;
+}
+

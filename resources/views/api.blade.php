@@ -8,15 +8,27 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://raw.githack.com/syt123450/giojs/master/assets/data/sampleData.js"></script>
-  
+    
+    {{--<link rel="stylesheet" href="css/common.css">--}}
+    
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+
 
 </head>
 
 <body>
-  <div id="globalArea" style="width:800px;height:420px"></div>
+  <div id="globalArea" style="
+
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;">
+  </div>
+
   <script src="https://raw.githack.com/syt123450/giojs/master/build/gio.min.js"></script>
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/script.js') }}"></script>
+  
   {{--<script src="{{ asset('js/scriptS.js') }}"></script>--}}
   
 
@@ -24,7 +36,7 @@
   <button id="off">回転OFF</button>
   <button id="add">データ追加</button>
   <button id="clear">データクリア</button>
-  <button id="usa">アメリカ</button>
+  
   
   
   <p id="moji"></p>
@@ -47,21 +59,28 @@
 
   <select id="coutry_select" name="coutry_select">
     @foreach ($giodata as $key => $value3)
-  <option value="{{ $value3["i"]}}, {{$value3["v"]}}">{{$value3["n"]}}</option>
+      <option value="{{ $value3["i"]}}, {{$value3["v"]}}, {{$value3["n"]}}">{{$value3["n"]}}</option>
     @endforeach
   </select>
 
   
   <select id="year_select" name="year_select">
-    @for ($i = 2015; $i < 2019; $i++)
-    <option value="{{$i}}" selected=3>{{$i}}</option>
+    <option value=''disabled selected=''>年数を選択してください</option>
+    @for ($i = 2015; $i < 2018; $i++)
+    <option value="{{$i}}">{{$i}}</option>
     @endfor
     
   </select>
   <p id="ton"></p>
-  <p id="see"></p>
-  <p id="json"></p>
+ 
 
+
+
+
+
+  <p id="estart">使用Api: 政府統計の総合窓口（e-Stat）</p><br>
+  <p id="estart2">このサービスは、政府統計総合窓口(e-Stat)のAPI機能を使用していますが、サービスの内容は国によって保証されたものではありません。
+  </p>
 </body>
 
 

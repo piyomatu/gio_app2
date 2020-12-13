@@ -50,7 +50,7 @@ class ApiGetController extends Controller
 
         
         $lang = "J";
-        $statsDataId = "0003280105";
+        $statsDataId = $year3;
         $metaGetFlg = "Y" ;
         $cntGetFlg = "N";
         $explanationGetFlg = "Y";
@@ -139,7 +139,7 @@ class ApiGetController extends Controller
         
         //echo "year3:".$year3;
 
-        var_dump($json);
+        //var_dump($country);
         //var_dump($bean);
         //return [$country, $bean];
         return view('api', compact('country', 'bean', 'giodata', 'json2'));
